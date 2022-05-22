@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TwoDataSources</string>
+    <string name="settings_menu_item_label">Settings</string>
+    <string name="about_menu_item_label">About</string>
+    <string name="datasource1_radio_button_label">datasource1</string>
+    <string name="datasource2_radio_button_label">datasource2</string>
 </resources>
