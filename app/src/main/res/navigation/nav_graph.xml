@@ -10,4 +10,9 @@
         android:name="ru.internetcloud.twodatasources.presentation.note_list.NoteListFragment"
         android:label="fragment_note_list"
         tools:layout="@layout/fragment_note_list" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.internetcloud.twodatasources.presentation.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
