@@ -10,7 +10,7 @@ interface NoteRepository {
 
     suspend fun deleteNote(note: Note, dataSourceType: DataSourceType)
 
-    fun getNoteById(id: Int, dataSourceType: DataSourceType): LiveData<Note?>
+    suspend fun getNoteById(id: Int, dataSourceType: DataSourceType): Note?
 
     fun getAllNotes(dataSourceType: DataSourceType): LiveData<List<Note>>
 }

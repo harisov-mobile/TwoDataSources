@@ -11,7 +11,6 @@ interface ApplicationComponent {
 
     fun inject(fragment: NoteListFragment)
 
-
     @Component.Factory
     interface Factory {
 
