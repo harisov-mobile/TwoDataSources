@@ -41,7 +41,7 @@ class NoteListFragment : Fragment() {
 
         when(item.itemId) {
             R.id.settings_menu_item -> {
-                Toast.makeText(context, "Navigate to Settings", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_noteListFragment_to_settingsFragment)
                 return true
             }
 
