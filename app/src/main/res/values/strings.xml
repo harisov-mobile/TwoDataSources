@@ -4,4 +4,11 @@
     <string name="about_menu_item_label">About</string>
     <string name="datasource1_radio_button_label">datasource1</string>
     <string name="datasource2_radio_button_label">datasource2</string>
+
+    <string name="note_name_hint">Name</string>
+    <string name="note_text_hint">Text</string>
+
+    <string name="save_button">Save</string>
+    <string name="close_button">Close</string>
+
 </resources>
