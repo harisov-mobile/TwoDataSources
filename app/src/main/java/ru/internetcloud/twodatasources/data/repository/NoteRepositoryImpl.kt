@@ -13,7 +13,7 @@ import ru.internetcloud.twodatasources.domain.repository.NoteRepository
 class NoteRepositoryImpl @Inject constructor(
     private val appDao: AppDao,
     private val noteMapper: NoteMapper
-): NoteRepository {
+) : NoteRepository {
     override suspend fun insertNote(note: Note, dataSourceType: DataSourceType) {
         appDao.insertNote(noteMapper.fromEntityToDbModel(note))
     }

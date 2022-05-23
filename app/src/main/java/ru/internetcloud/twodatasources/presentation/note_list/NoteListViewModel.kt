@@ -7,7 +7,7 @@ import ru.internetcloud.twodatasources.domain.usecase.GetAllNotesUseCase
 
 class NoteListViewModel @Inject constructor(
     private val getAllNotesUseCase: GetAllNotesUseCase
-) : ViewModel()  {
+) : ViewModel() {
 
     val noteListLiveData = getAllNotesUseCase.getAllNotes(DataSourceType.ROOM_DATABASE1)
 }

@@ -64,7 +64,7 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(EditNoteViewModel::class.java)
 
-        viewModel.note?: let {
+        viewModel.note ?: let {
             // это новый экран, т.к. viewModel.note не проинициализирована
             readArgs()
         }
@@ -145,7 +145,6 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
             viewModel.note?.let { currentNote ->
                 viewModel.insertNote(currentNote)
             }
-
         }
 
         binding.closeNoteButton.setOnClickListener {
@@ -269,5 +268,4 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
                 return super.onOptionsItemSelected(item)
         }
     }
-
 }

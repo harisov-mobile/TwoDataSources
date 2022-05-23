@@ -11,5 +11,4 @@ class GetAllNotesUseCase @Inject constructor(private val noteRepository: NoteRep
     fun getAllNotes(dataSourceType: DataSourceType): LiveData<List<Note>> {
         return noteRepository.getAllNotes(dataSourceType)
     }
-
 }

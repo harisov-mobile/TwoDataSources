@@ -2,7 +2,6 @@ package ru.internetcloud.twodatasources.presentation.note_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ru.internetcloud.twodatasources.databinding.ItemNoteListBinding
 import ru.internetcloud.twodatasources.domain.model.Note

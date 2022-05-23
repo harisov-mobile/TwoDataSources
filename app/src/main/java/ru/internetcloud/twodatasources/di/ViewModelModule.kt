@@ -20,5 +20,4 @@ interface ViewModelModule {
     @ViewModelKey(EditNoteViewModel::class)
     @Binds
     fun bindEditNoteViewModel(impl: EditNoteViewModel): ViewModel
-
 }

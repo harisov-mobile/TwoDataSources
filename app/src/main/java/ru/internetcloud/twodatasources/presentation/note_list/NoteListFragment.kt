@@ -114,7 +114,7 @@ class NoteListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.settings_menu_item -> {
                 findNavController().navigate(R.id.action_noteListFragment_to_settingsFragment)
                 return true
@@ -125,7 +125,7 @@ class NoteListFragment : Fragment() {
                 return true
             }
 
-            else ->  return super.onOptionsItemSelected(item)
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 }
