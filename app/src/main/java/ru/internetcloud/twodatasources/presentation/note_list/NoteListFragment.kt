@@ -95,9 +95,12 @@ class NoteListFragment : Fragment() {
 
             val fragmentLabel = getString(R.string.edit_note_fragment_label)
 
+            val copyNote = currentNote.copy() // надо копию экземпляра класса, специально чтобы при изменении
+            // копии не пострадал оригинал, если пользователь нажмет "Отмена"
+
             val direction = NoteListFragmentDirections.actionNoteListFragmentToEditNoteFragment(
                 operationMode = operationMode,
-                note = currentNote,
+                note = copyNote,
                 fragmentEditNoteLabel = fragmentLabel)
             findNavController().navigate(direction)
         }
