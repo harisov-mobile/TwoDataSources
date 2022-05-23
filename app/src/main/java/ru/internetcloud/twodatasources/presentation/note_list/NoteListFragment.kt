@@ -80,17 +80,25 @@ class NoteListFragment : Fragment() {
     private fun setupClickListeners() {
         binding.addNoteButton.setOnClickListener {
             val operationMode = OperationMode.ADD
+
+            val fragmentLabel = getString(R.string.add_note_fragment_label)
+
             val direction = NoteListFragmentDirections.actionNoteListFragmentToEditNoteFragment(
                 operationMode = operationMode,
-                note = null)
+                note = null,
+                fragmentEditNoteLabel = fragmentLabel)
             findNavController().navigate(direction)
         }
 
         noteListAdapter.onNoteListClickListener = { currentNote ->
             val operationMode = OperationMode.EDIT
+
+            val fragmentLabel = getString(R.string.edit_note_fragment_label)
+
             val direction = NoteListFragmentDirections.actionNoteListFragmentToEditNoteFragment(
                 operationMode = operationMode,
-                note = currentNote)
+                note = currentNote,
+                fragmentEditNoteLabel = fragmentLabel)
             findNavController().navigate(direction)
         }
     }

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/noteListFragment"
         android:name="ru.internetcloud.twodatasources.presentation.note_list.NoteListFragment"
-        android:label="Notes"
+        android:label="@string/note_list_fragment_label"
         tools:layout="@layout/fragment_note_list" >
         <action
             android:id="@+id/action_noteListFragment_to_settingsFragment"
@@ -20,12 +20,12 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="ru.internetcloud.twodatasources.presentation.settings.SettingsFragment"
-        android:label="Settings"
+        android:label="@string/settings_fragment_label"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/editNoteFragment"
         android:name="ru.internetcloud.twodatasources.presentation.edit_note.EditNoteFragment"
-        android:label="fragment_edit_note"
+        android:label="{fragment_edit_note_label}"
         tools:layout="@layout/fragment_edit_note" >
     <argument
         android:name="operationMode"
@@ -34,5 +34,8 @@
         android:name="note"
         app:argType="ru.internetcloud.twodatasources.domain.model.Note"
         app:nullable="true" />
+        <argument
+            android:name="fragment_edit_note_label"
+            app:argType="string" />
     </fragment>
 </navigation>

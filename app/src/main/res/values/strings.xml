@@ -23,5 +23,10 @@
 
     <string name="yes_button">Yes</string>
     <string name="no_button">No</string>
+    <string name="note_list_fragment_label">Notes</string>
+    <string name="settings_fragment_label">Settings</string>
+
+    <string name="add_note_fragment_label">Add new note</string>
+    <string name="edit_note_fragment_label">Edit note</string>
 
 </resources>
