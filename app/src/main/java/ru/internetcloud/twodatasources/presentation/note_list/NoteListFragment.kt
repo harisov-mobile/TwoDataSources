@@ -18,6 +18,7 @@ import ru.internetcloud.twodatasources.R
 import ru.internetcloud.twodatasources.TwoDataSourcesApp
 import ru.internetcloud.twodatasources.databinding.FragmentNoteListBinding
 import ru.internetcloud.twodatasources.di.ViewModelFactory
+import ru.internetcloud.twodatasources.domain.model.OperationMode
 
 class NoteListFragment : Fragment() {
 
@@ -77,8 +78,20 @@ class NoteListFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
+        binding.addNoteButton.setOnClickListener {
+            val operationMode = OperationMode.ADD
+            val direction = NoteListFragmentDirections.actionNoteListFragmentToEditNoteFragment(
+                operationMode = operationMode,
+                note = null)
+            findNavController().navigate(direction)
+        }
+
         noteListAdapter.onNoteListClickListener = { currentNote ->
-            Toast.makeText(context, "note = ${currentNote}", Toast.LENGTH_SHORT).show()
+            val operationMode = OperationMode.EDIT
+            val direction = NoteListFragmentDirections.actionNoteListFragmentToEditNoteFragment(
+                operationMode = operationMode,
+                note = currentNote)
+            findNavController().navigate(direction)
         }
     }
 

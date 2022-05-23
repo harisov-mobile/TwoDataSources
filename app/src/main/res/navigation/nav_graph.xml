@@ -13,10 +13,26 @@
         <action
             android:id="@+id/action_noteListFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_noteListFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="ru.internetcloud.twodatasources.presentation.settings.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="ru.internetcloud.twodatasources.presentation.edit_note.EditNoteFragment"
+        android:label="fragment_edit_note"
+        tools:layout="@layout/fragment_edit_note" >
+    <argument
+        android:name="operationMode"
+        app:argType="ru.internetcloud.twodatasources.domain.model.OperationMode" />
+    <argument
+        android:name="note"
+        app:argType="ru.internetcloud.twodatasources.domain.model.Note"
+        app:nullable="true" />
+    </fragment>
 </navigation>
