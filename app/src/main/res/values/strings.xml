@@ -4,4 +4,30 @@
     <string name="about_menu_item_label">About</string>
     <string name="datasource1_radio_button_label">datasource1</string>
     <string name="datasource2_radio_button_label">datasource2</string>
+
+    <string name="note_name_hint">Name</string>
+    <string name="note_text_hint">Text</string>
+
+    <string name="error_input_name">Error! Input name!</string>
+
+    <string name="data_was_changed_question">The data has been changed. Save changes?</string>
+    <string name="success_saved">Information saved</string>
+    <string name="success_deleted">Note deleted</string>
+    <string name="delete_note_question">Do you want to delete this note?</string>
+    <string name="error">Error</string>
+
+    <string name="add_button">Add</string>
+    <string name="save_button">Save</string>
+    <string name="close_button">Close</string>
+    <string name="ok_button">Ок</string>
+
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
+    <string name="note_list_fragment_label">Notes</string>
+    <string name="settings_fragment_label">Settings</string>
+
+    <string name="add_note_fragment_label">Add new note</string>
+    <string name="edit_note_fragment_label">Edit note</string>
+    <string name="delete_note_menu_item_title">Delete note</string>
+
 </resources>
