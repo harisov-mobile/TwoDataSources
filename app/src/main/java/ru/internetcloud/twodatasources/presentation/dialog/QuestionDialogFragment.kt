@@ -1,4 +1,4 @@
-package ru.internetcloud.notes.petrov.presentation.dialog
+package ru.internetcloud.twodatasources.presentation.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
