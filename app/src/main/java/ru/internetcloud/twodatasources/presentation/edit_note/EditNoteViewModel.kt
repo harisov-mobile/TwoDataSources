@@ -74,4 +74,16 @@ class EditNoteViewModel @Inject constructor(
     fun resetErrorInputName() {
         _errorInputName.value = false
     }
+
+    fun deleteNote(deletableNote: Note) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                deleteNoteUseCase.deleteNote(deletableNote, DataSourceType.ROOM_DATABASE1)
+                _noteIsDeleted.postValue(true)
+            } catch (e: Exception) {
+                _noteIsDeleted.postValue(false)
+                _errorMessage.postValue(e.message.toString())
+            }
+        }
+    }
 }

@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -119,7 +122,6 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
     }
 
     private fun readArgs() {
-
         viewModel.operationMode = args.operationMode
         if (viewModel.operationMode != OperationMode.EDIT && viewModel.operationMode != OperationMode.ADD) {
             throw RuntimeException("Uknown screen mode ${viewModel.operationMode}")
@@ -132,7 +134,10 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
     }
 
     private fun setupMenu() {
-        // TODO("Not yet implemented")
+        if (viewModel.operationMode == OperationMode.EDIT) {
+            setHasOptionsMenu(true) // меню надо показывать только для режима редактирования, т.к.
+            // в режиме добавления - удалять из базы еще нечего, не добавлено же еще...
+        }
     }
 
     private fun setupClickListeners() {
@@ -224,7 +229,45 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
                 }
             }
 
-            //
+            REQUEST_DELETE_NOTE_KEY -> {
+                val needDeleteData: Boolean = result.getBoolean(ARG_ANSWER, false)
+                if (needDeleteData) {
+                    viewModel.note?.let { currentNote ->
+                        viewModel.deleteNote(currentNote)
+                    }
+                }
+            }
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.edit_note_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.delete_note_menu_item -> {
+                QuestionDialogFragment
+                    .newInstance(
+                        getString(R.string.delete_note_question),
+                        REQUEST_DELETE_NOTE_KEY,
+                        ARG_ANSWER
+                    )
+                    .show(childFragmentManager, REQUEST_DELETE_NOTE_KEY)
+                return true
+            }
+
+            R.id.settings_menu_item -> {
+                findNavController().navigate(R.id.action_editNoteFragment_to_settingsFragment)
+                return true
+            }
+
+            else ->
+                return super.onOptionsItemSelected(item)
+        }
+    }
+
 }

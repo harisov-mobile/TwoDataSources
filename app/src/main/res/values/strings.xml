@@ -28,5 +28,6 @@
 
     <string name="add_note_fragment_label">Add new note</string>
     <string name="edit_note_fragment_label">Edit note</string>
+    <string name="delete_note_menu_item_title">Delete note</string>
 
 </resources>

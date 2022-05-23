@@ -9,7 +9,7 @@
         android:id="@+id/noteListFragment"
         android:name="ru.internetcloud.twodatasources.presentation.note_list.NoteListFragment"
         android:label="@string/note_list_fragment_label"
-        tools:layout="@layout/fragment_note_list" >
+        tools:layout="@layout/fragment_note_list">
         <action
             android:id="@+id/action_noteListFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -26,16 +26,19 @@
         android:id="@+id/editNoteFragment"
         android:name="ru.internetcloud.twodatasources.presentation.edit_note.EditNoteFragment"
         android:label="{fragment_edit_note_label}"
-        tools:layout="@layout/fragment_edit_note" >
-    <argument
-        android:name="operationMode"
-        app:argType="ru.internetcloud.twodatasources.domain.model.OperationMode" />
-    <argument
-        android:name="note"
-        app:argType="ru.internetcloud.twodatasources.domain.model.Note"
-        app:nullable="true" />
+        tools:layout="@layout/fragment_edit_note">
+        <argument
+            android:name="operationMode"
+            app:argType="ru.internetcloud.twodatasources.domain.model.OperationMode" />
+        <argument
+            android:name="note"
+            app:argType="ru.internetcloud.twodatasources.domain.model.Note"
+            app:nullable="true" />
         <argument
             android:name="fragment_edit_note_label"
             app:argType="string" />
+        <action
+            android:id="@+id/action_editNoteFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 </navigation>
