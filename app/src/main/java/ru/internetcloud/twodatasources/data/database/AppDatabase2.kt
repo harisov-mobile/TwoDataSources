@@ -9,18 +9,18 @@ import ru.internetcloud.twodatasources.data.entity.NoteDbModel
 @Database(entities = [NoteDbModel::class], version = 1, exportSchema = true)
 abstract class AppDatabase2 : RoomDatabase() {
 
-    abstract fun appDao(): AppDao
+    abstract fun appDao2(): AppDao2
 
     companion object {
 
         private const val DATABASE_NAME = "notes2.db"
 
         @Volatile // чтобы данная переменная не кэшировалась!!!
-        private var instance: AppDatabase? = null
+        private var instance: AppDatabase2? = null
 
         private val Lock = Any()
 
-        fun getInstance(application: Application): AppDatabase {
+        fun getInstance(application: Application): AppDatabase2 {
             instance?.let {
                 return it
             }
@@ -30,7 +30,7 @@ abstract class AppDatabase2 : RoomDatabase() {
                 }
                 val db = Room.databaseBuilder(
                     application,
-                    AppDatabase::class.java,
+                    AppDatabase2::class.java,
                     DATABASE_NAME
                 )
                     .build()
