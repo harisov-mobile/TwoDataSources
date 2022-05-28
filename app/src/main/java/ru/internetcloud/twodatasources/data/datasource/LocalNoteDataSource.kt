@@ -42,4 +42,14 @@ class LocalNoteDataSource @Inject constructor(
     suspend fun deleteNote(note: Note) {
         appDao.deleteNote(noteMapper.fromEntityToDbModel(note))
     }
+
+    suspend fun getNoteById(id: Int): Note? {
+        val noteDbModel = appDao.getNoteById(id)
+
+        return noteDbModel?.let {
+            noteMapper.fromDbModelToEntity(it)
+        } ?: let {
+            null
+        }
+    }
 }

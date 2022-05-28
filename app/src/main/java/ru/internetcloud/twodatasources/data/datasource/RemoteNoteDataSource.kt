@@ -25,4 +25,14 @@ class RemoteNoteDataSource @Inject constructor(
     suspend fun deleteNote(note: Note) {
         appDao2.deleteNote(noteMapper.fromEntityToDbModel(note))
     }
+
+    suspend fun getNoteById(id: Int): Note? {
+        val noteDbModel = appDao2.getNoteById(id)
+
+        return noteDbModel?.let {
+            noteMapper.fromDbModelToEntity(it)
+        } ?: let {
+            null
+        }
+    }
 }
