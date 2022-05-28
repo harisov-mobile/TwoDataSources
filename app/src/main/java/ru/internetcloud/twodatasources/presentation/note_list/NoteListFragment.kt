@@ -74,6 +74,10 @@ class NoteListFragment : Fragment(), FragmentResultListener {
         })
 
         childFragmentManager.setFragmentResultListener(REQUEST_EXIT_QUESTION_KEY, viewLifecycleOwner, this)
+
+        savedInstanceState ?: let {
+            viewModel.loadNotes()
+        }
     }
 
     override fun onDestroyView() {
@@ -88,8 +92,12 @@ class NoteListFragment : Fragment(), FragmentResultListener {
     }
 
     private fun observeViewModel() {
-        viewModel.noteListLiveData.observe(viewLifecycleOwner) { list ->
-            noteListAdapter.submitList(list)
+        viewModel.dataIsLoaded.observe(viewLifecycleOwner) { isLoaded ->
+            if (isLoaded) {
+                viewModel.noteListLiveData.observe(viewLifecycleOwner) { list ->
+                    noteListAdapter.submitList(list)
+                }
+            }
         }
     }
 
