@@ -1,16 +1,14 @@
 package ru.internetcloud.twodatasources.domain.model
 
-class CurrentDataSourceType {
+object CurrentDataSourceType {
 
-    companion object {
-        private var dataSourceType: DataSourceType? = null
+    private var dataSourceType: DataSourceType? = null
 
-        fun setCurrent(sourceType: DataSourceType) {
-            dataSourceType = sourceType
-        }
+    fun setCurrent(sourceType: DataSourceType) {
+        dataSourceType = sourceType
+    }
 
-        fun getCurrent(): DataSourceType? {
-            return dataSourceType
-        }
+    fun getCurrent(): DataSourceType? {
+        return dataSourceType
     }
 }
