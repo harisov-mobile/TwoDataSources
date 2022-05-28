@@ -30,4 +30,5 @@
     <string name="edit_note_fragment_label">Edit note</string>
     <string name="delete_note_menu_item_title">Delete note</string>
 
+    <string name="exit_from_app_question">Do you want to exit the %1$s?</string>
 </resources>

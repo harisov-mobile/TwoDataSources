@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.ViewModelProvider
@@ -77,6 +78,12 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
         setupClickListeners()
         setupMenu()
 
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                onCloseNote()
+            }
+        })
+
         childFragmentManager.setFragmentResultListener(REQUEST_DATA_WAS_CHANGED_KEY, viewLifecycleOwner, this)
         childFragmentManager.setFragmentResultListener(REQUEST_DELETE_NOTE_KEY, viewLifecycleOwner, this)
     }
@@ -134,10 +141,10 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
     }
 
     private fun setupMenu() {
-        if (viewModel.operationMode == OperationMode.EDIT) {
+        //if (viewModel.operationMode == OperationMode.EDIT) {
             setHasOptionsMenu(true) // меню надо показывать только для режима редактирования, т.к.
             // в режиме добавления - удалять из базы еще нечего, не добавлено же еще...
-        }
+        //}
     }
 
     private fun setupClickListeners() {
@@ -172,7 +179,7 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
         viewModel.noteIsSaved.observe(viewLifecycleOwner) { isSaved ->
             if (isSaved) {
                 if (viewModel.closeOnSave) {
-                    Toast.makeText(context, getString(R.string.success_saved), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.success_saved), Toast.LENGTH_LONG).show()
                     findNavController().popBackStack()
                 } else {
                     viewModel.isChanged = false
@@ -241,8 +248,9 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-
-        inflater.inflate(R.menu.edit_note_menu, menu)
+        if (viewModel.operationMode == OperationMode.EDIT) {
+            inflater.inflate(R.menu.edit_note_menu, menu)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -261,6 +269,11 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
 
             R.id.settings_menu_item -> {
                 findNavController().navigate(R.id.action_editNoteFragment_to_settingsFragment)
+                return true
+            }
+
+            android.R.id.home -> {
+                onCloseNote()
                 return true
             }
 

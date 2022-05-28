@@ -9,7 +9,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import java.lang.IllegalStateException
@@ -19,8 +21,9 @@ import ru.internetcloud.twodatasources.TwoDataSourcesApp
 import ru.internetcloud.twodatasources.databinding.FragmentNoteListBinding
 import ru.internetcloud.twodatasources.di.ViewModelFactory
 import ru.internetcloud.twodatasources.domain.model.OperationMode
+import ru.internetcloud.twodatasources.presentation.dialog.QuestionDialogFragment
 
-class NoteListFragment : Fragment() {
+class NoteListFragment : Fragment(), FragmentResultListener {
 
     // даггер:
     @Inject
@@ -36,6 +39,11 @@ class NoteListFragment : Fragment() {
 
     private lateinit var viewModel: NoteListViewModel
     private lateinit var noteListAdapter: NoteListAdapter
+
+    companion object {
+        private val REQUEST_EXIT_QUESTION_KEY = "exit_question_key"
+        private val ARG_ANSWER = "answer"
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,6 +66,14 @@ class NoteListFragment : Fragment() {
         observeViewModel()
         setupClickListeners()
         setHasOptionsMenu(true)
+
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                onExitNoteList()
+            }
+        })
+
+        childFragmentManager.setFragmentResultListener(REQUEST_EXIT_QUESTION_KEY, viewLifecycleOwner, this)
     }
 
     override fun onDestroyView() {
@@ -126,6 +142,27 @@ class NoteListFragment : Fragment() {
             }
 
             else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun onExitNoteList() {
+        QuestionDialogFragment
+            .newInstance(
+                getString(R.string.exit_from_app_question, getString(R.string.app_name)),
+                REQUEST_EXIT_QUESTION_KEY,
+                ARG_ANSWER
+            )
+            .show(childFragmentManager, REQUEST_EXIT_QUESTION_KEY)
+    }
+
+    override fun onFragmentResult(requestKey: String, result: Bundle) {
+        when (requestKey) {
+            REQUEST_EXIT_QUESTION_KEY -> {
+                val exit: Boolean = result.getBoolean(ARG_ANSWER, false)
+                if (exit) {
+                    activity?.finish()
+                }
+            }
         }
     }
 }
