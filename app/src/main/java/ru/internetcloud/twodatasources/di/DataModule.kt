@@ -8,7 +8,9 @@ import ru.internetcloud.twodatasources.data.database.AppDao
 import ru.internetcloud.twodatasources.data.database.AppDao2
 import ru.internetcloud.twodatasources.data.database.AppDatabase
 import ru.internetcloud.twodatasources.data.database.AppDatabase2
+import ru.internetcloud.twodatasources.data.repository.DataStoreRepositoryImpl
 import ru.internetcloud.twodatasources.data.repository.NoteRepositoryImpl
+import ru.internetcloud.twodatasources.domain.repository.DataStoreRepository
 import ru.internetcloud.twodatasources.domain.repository.NoteRepository
 
 @Module
@@ -17,6 +19,10 @@ interface DataModule {
     @ApplicationScope
     @Binds
     fun bindNoteRepository(impl: NoteRepositoryImpl): NoteRepository
+
+    @ApplicationScope
+    @Binds
+    fun bindDataStoreRepository(impl: DataStoreRepositoryImpl): DataStoreRepository
 
     companion object {
 
