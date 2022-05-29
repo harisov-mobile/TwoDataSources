@@ -30,22 +30,26 @@ class NoteListViewModel @Inject constructor(
         _dataIsLoaded.value = true
     }
 
-    private lateinit var flowDataSourceTypeLiveData: LiveData<DataSourceType>
+    var flowDataSourceTypeLiveData: LiveData<DataSourceType>? = null
 
     fun loadNotes() {
-        currentDataSourceType.getCurrent()?.let { dataSourceType ->
-            noteListLiveData = getAllNotesUseCase.getAllNotes(dataSourceType)
-            _dataIsLoaded.value = true
-        } ?: let {
+        if (flowDataSourceTypeLiveData == null || currentDataSourceType.getCurrent() == null) {
             val flowDataSourceType = readDataSourceTypeUseCase.readDataSourceType()
             flowDataSourceTypeLiveData = flowDataSourceType.asLiveData()
-            flowDataSourceTypeLiveData.observeForever(flowDataSourceTypeObserver)
+            flowDataSourceTypeLiveData?.observeForever(flowDataSourceTypeObserver)
+        } else {
+            currentDataSourceType.getCurrent()?.let { dataSourceType ->
+                noteListLiveData = getAllNotesUseCase.getAllNotes(dataSourceType)
+                _dataIsLoaded.value = true
+            }
         }
     }
 
     override fun onCleared() {
         super.onCleared()
 
-        flowDataSourceTypeLiveData.removeObserver(flowDataSourceTypeObserver)
+        // статическая переменная currentDataSourceType при выходе из приложения
+        // почему-то не обнуляется!
+        flowDataSourceTypeLiveData?.removeObserver(flowDataSourceTypeObserver)
     }
 }
