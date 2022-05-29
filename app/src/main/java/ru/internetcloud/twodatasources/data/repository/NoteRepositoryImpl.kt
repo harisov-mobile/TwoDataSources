@@ -1,13 +1,9 @@
 package ru.internetcloud.twodatasources.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import javax.inject.Inject
-import ru.internetcloud.twodatasources.data.database.AppDao
 import ru.internetcloud.twodatasources.data.datasource.LocalNoteDataSource
 import ru.internetcloud.twodatasources.data.datasource.RemoteNoteDataSource
-import ru.internetcloud.twodatasources.data.entity.NoteDbModel
-import ru.internetcloud.twodatasources.data.mapper.NoteMapper
 import ru.internetcloud.twodatasources.domain.model.DataSourceType
 import ru.internetcloud.twodatasources.domain.model.Note
 import ru.internetcloud.twodatasources.domain.repository.NoteRepository

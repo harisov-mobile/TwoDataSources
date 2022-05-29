@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import java.lang.IllegalStateException
 import javax.inject.Inject
 import ru.internetcloud.twodatasources.R
 import ru.internetcloud.twodatasources.TwoDataSourcesApp
 import ru.internetcloud.twodatasources.databinding.FragmentSettingsBinding
 import ru.internetcloud.twodatasources.di.ViewModelFactory
 import ru.internetcloud.twodatasources.domain.model.DataSourceType
-import ru.internetcloud.twodatasources.presentation.edit_note.EditNoteViewModel
 
 class SettingsFragment : Fragment() {
 
@@ -63,7 +61,7 @@ class SettingsFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.datasourceRadioGroup.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId) {
+            when (checkedId) {
                 R.id.datasource1_radio_button -> viewModel.saveDataSourceTypeToStorage(DataSourceType.ROOM_DATABASE1)
                 R.id.datasource2_radio_button -> viewModel.saveDataSourceTypeToStorage(DataSourceType.ROOM_DATABASE2)
             }

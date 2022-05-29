@@ -18,7 +18,7 @@ import ru.internetcloud.twodatasources.domain.usecase.InsertNoteUseCase
 class EditNoteViewModel @Inject constructor(
     private val insertNoteUseCase: InsertNoteUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
-    currentDataSourceType: CurrentDataSourceType,
+    currentDataSourceType: CurrentDataSourceType
 ) : ViewModel() {
 
     var note: Note? = null

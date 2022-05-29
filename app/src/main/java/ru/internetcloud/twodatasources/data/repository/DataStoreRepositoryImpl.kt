@@ -38,9 +38,9 @@ class DataStoreRepositoryImpl @Inject constructor(
         }
     }
         .map { settings ->
-            val intDataStoreType:Int = settings[PreferenceKeys.selectedDataSourceType] ?: DATA_SOURCE_DEFAULT_VALUE
+            val intDataStoreType: Int = settings[PreferenceKeys.selectedDataSourceType] ?: DATA_SOURCE_DEFAULT_VALUE
 
-            when(intDataStoreType) {
+            when (intDataStoreType) {
                 0 -> DataSourceType.ROOM_DATABASE1
                 1 -> DataSourceType.ROOM_DATABASE2
                 else -> DataSourceType.ROOM_DATABASE1
