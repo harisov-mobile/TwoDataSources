@@ -39,7 +39,7 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
 
     private var _binding: FragmentEditNoteBinding? = null
     val binding: FragmentEditNoteBinding
-    get() = _binding ?: throw IllegalStateException("FragmentEditNoteBinding is null")
+        get() = _binding ?: throw IllegalStateException("FragmentEditNoteBinding is null")
 
     private lateinit var viewModel: EditNoteViewModel
 
@@ -141,10 +141,7 @@ class EditNoteFragment : Fragment(), FragmentResultListener {
     }
 
     private fun setupMenu() {
-        //if (viewModel.operationMode == OperationMode.EDIT) {
-            setHasOptionsMenu(true) // меню надо показывать только для режима редактирования, т.к.
-            // в режиме добавления - удалять из базы еще нечего, не добавлено же еще...
-        //}
+        setHasOptionsMenu(true)
     }
 
     private fun setupClickListeners() {

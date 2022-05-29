@@ -5,6 +5,9 @@ buildscript {
         daggerVersion = "2.40.1"
         roomVersion = "2.4.2"
         navVersion = "2.4.1"
+        datastoreVersion = "1.0.0"
+        lifecycleExtensionVersion = "2.2.0"
+        lifecycleVersion = "2.4.0"
     }
 
     repositories {

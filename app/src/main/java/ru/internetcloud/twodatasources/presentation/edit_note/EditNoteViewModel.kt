@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import java.lang.IllegalStateException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.internetcloud.twodatasources.domain.model.CurrentDataSourceType
 import ru.internetcloud.twodatasources.domain.model.DataSourceType
 import ru.internetcloud.twodatasources.domain.model.Note
 import ru.internetcloud.twodatasources.domain.model.OperationMode
@@ -15,7 +17,8 @@ import ru.internetcloud.twodatasources.domain.usecase.InsertNoteUseCase
 
 class EditNoteViewModel @Inject constructor(
     private val insertNoteUseCase: InsertNoteUseCase,
-    private val deleteNoteUseCase: DeleteNoteUseCase
+    private val deleteNoteUseCase: DeleteNoteUseCase,
+    currentDataSourceType: CurrentDataSourceType
 ) : ViewModel() {
 
     var note: Note? = null
@@ -41,6 +44,14 @@ class EditNoteViewModel @Inject constructor(
     var closeOnSave: Boolean = false
     var operationMode: OperationMode? = null
 
+    private lateinit var dataSourceType: DataSourceType
+
+    init {
+        currentDataSourceType.getCurrent()?.let { sourceType ->
+            dataSourceType = sourceType
+        } ?: throw IllegalStateException("CurrentDataSourceType is not initialized")
+    }
+
     fun createNote() {
         note = Note()
     }
@@ -50,7 +61,7 @@ class EditNoteViewModel @Inject constructor(
         if (areFieldsValid) {
             viewModelScope.launch(Dispatchers.IO) {
                 try {
-                    insertNoteUseCase.insertNote(updatableNote, DataSourceType.ROOM_DATABASE1)
+                    insertNoteUseCase.insertNote(updatableNote, dataSourceType)
                     _noteIsSaved.postValue(true)
                 } catch (e: Exception) {
                     _noteIsSaved.postValue(false)
@@ -78,7 +89,7 @@ class EditNoteViewModel @Inject constructor(
     fun deleteNote(deletableNote: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                deleteNoteUseCase.deleteNote(deletableNote, DataSourceType.ROOM_DATABASE1)
+                deleteNoteUseCase.deleteNote(deletableNote, dataSourceType)
                 _noteIsDeleted.postValue(true)
             } catch (e: Exception) {
                 _noteIsDeleted.postValue(false)

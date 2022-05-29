@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import java.lang.IllegalStateException
 import javax.inject.Inject
 import ru.internetcloud.twodatasources.R
 import ru.internetcloud.twodatasources.TwoDataSourcesApp
@@ -34,8 +33,8 @@ class NoteListFragment : Fragment(), FragmentResultListener {
     }
 
     private var _binding: FragmentNoteListBinding? = null
-            val binding: FragmentNoteListBinding
-            get() = _binding ?: throw IllegalStateException("FragmentNoteListBinding is null")
+    val binding: FragmentNoteListBinding
+        get() = _binding ?: throw IllegalStateException("FragmentNoteListBinding is null")
 
     private lateinit var viewModel: NoteListViewModel
     private lateinit var noteListAdapter: NoteListAdapter
@@ -74,6 +73,10 @@ class NoteListFragment : Fragment(), FragmentResultListener {
         })
 
         childFragmentManager.setFragmentResultListener(REQUEST_EXIT_QUESTION_KEY, viewLifecycleOwner, this)
+
+        savedInstanceState ?: let {
+            viewModel.loadNotes()
+        }
     }
 
     override fun onDestroyView() {
@@ -88,8 +91,12 @@ class NoteListFragment : Fragment(), FragmentResultListener {
     }
 
     private fun observeViewModel() {
-        viewModel.noteListLiveData.observe(viewLifecycleOwner) { list ->
-            noteListAdapter.submitList(list)
+        viewModel.dataIsLoaded.observe(viewLifecycleOwner) { isLoaded ->
+            if (isLoaded) {
+                viewModel.noteListLiveData.observe(viewLifecycleOwner) { list ->
+                    noteListAdapter.submitList(list)
+                }
+            }
         }
     }
 
@@ -102,7 +109,8 @@ class NoteListFragment : Fragment(), FragmentResultListener {
             val direction = NoteListFragmentDirections.actionNoteListFragmentToEditNoteFragment(
                 operationMode = operationMode,
                 note = null,
-                fragmentEditNoteLabel = fragmentLabel)
+                fragmentEditNoteLabel = fragmentLabel
+            )
             findNavController().navigate(direction)
         }
 
@@ -117,7 +125,8 @@ class NoteListFragment : Fragment(), FragmentResultListener {
             val direction = NoteListFragmentDirections.actionNoteListFragmentToEditNoteFragment(
                 operationMode = operationMode,
                 note = copyNote,
-                fragmentEditNoteLabel = fragmentLabel)
+                fragmentEditNoteLabel = fragmentLabel
+            )
             findNavController().navigate(direction)
         }
     }

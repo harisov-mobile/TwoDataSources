@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.internetcloud.twodatasources.presentation.edit_note.EditNoteViewModel
 import ru.internetcloud.twodatasources.presentation.note_list.NoteListViewModel
+import ru.internetcloud.twodatasources.presentation.settings.SettingsViewModel
 
 @Module
 interface ViewModelModule {
@@ -20,4 +21,9 @@ interface ViewModelModule {
     @ViewModelKey(EditNoteViewModel::class)
     @Binds
     fun bindEditNoteViewModel(impl: EditNoteViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(SettingsViewModel::class)
+    @Binds
+    fun bindSettingsViewModel(impl: SettingsViewModel): ViewModel
 }
