@@ -33,6 +33,11 @@ class NoteListViewModel @Inject constructor(
     var flowDataSourceTypeLiveData: LiveData<DataSourceType>? = null
 
     fun loadNotes() {
+
+        // TODO Как избежать статического класса (объекта) currentDataSourceType?
+        // нужен элегантный способ считать DataSourceType из Хранилища
+        // и использовать его уже не прибегая к хранилищу!
+
         if (flowDataSourceTypeLiveData == null || currentDataSourceType.getCurrent() == null) {
             val flowDataSourceType = readDataSourceTypeUseCase.readDataSourceType()
             flowDataSourceTypeLiveData = flowDataSourceType.asLiveData()
