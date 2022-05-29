@@ -20,8 +20,7 @@ class DataStoreRepositoryImpl @Inject constructor(
 
     companion object {
         private const val DATA_SOURCE_TYPE = "data_source_type"
-        private const val DATA_SOURCE_DEFAULT_VALUE = 1
-
+        private const val DATA_SOURCE_DEFAULT_VALUE = 0
         private const val PREFERENCES_NAME = "app_notes_preferences"
     }
 
