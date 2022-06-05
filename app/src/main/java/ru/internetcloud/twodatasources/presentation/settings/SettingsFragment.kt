@@ -52,11 +52,17 @@ class SettingsFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.dataSourceType.observe(viewLifecycleOwner) { currentDataSource ->
-            when (currentDataSource) {
-                DataSourceType.ROOM_DATABASE1 -> binding.datasource1RadioButton.isChecked = true
-                DataSourceType.ROOM_DATABASE2 -> binding.datasource2RadioButton.isChecked = true
-            }
+            updateUI(currentDataSource)
         }
+    }
+
+    private fun updateUI(currentDataSource: DataSourceType) {
+        unsetupClickListeners()
+        when (currentDataSource) {
+            DataSourceType.ROOM_DATABASE1 -> binding.datasource1RadioButton.isChecked = true
+            DataSourceType.ROOM_DATABASE2 -> binding.datasource2RadioButton.isChecked = true
+        }
+        setupClickListeners()
     }
 
     private fun setupClickListeners() {
@@ -66,5 +72,9 @@ class SettingsFragment : Fragment() {
                 R.id.datasource2_radio_button -> viewModel.saveDataSourceTypeToStorage(DataSourceType.ROOM_DATABASE2)
             }
         }
+    }
+
+    private fun unsetupClickListeners() {
+        binding.datasourceRadioGroup.setOnCheckedChangeListener(null)
     }
 }
