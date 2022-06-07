@@ -31,16 +31,8 @@ class GetAllNotesUseCaseTest {
         val getAllNotesUseCase = GetAllNotesUseCase(repository)
 
         val list: List<Note> = mutableListOf(
-            Note(
-                id = 0,
-                name = "Name1",
-                text = "text1"
-            ),
-            Note(
-                id = 1,
-                name = "Name2",
-                text = "text2"
-            )
+            Note(id = 0, name = "Name1", text = "text1"),
+            Note(id = 1, name = "Name2", text = "text2")
         )
 
         val expected: LiveData<List<Note>> = MutableLiveData<List<Note>>(list)
